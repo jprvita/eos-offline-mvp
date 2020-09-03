@@ -47,10 +47,20 @@ class MVPCollector(EOSMetrics):
             if os.path.exists(self.offline_machine_data_dir) is False:
                 os.mkdir(self.offline_machine_data_dir)
             else:
+                # JPRVITA: let's not remove this directory if it already
+                # exists. If the user tries to extract the data two times in a
+                # row, by error, all the data will be lost. You can simply
+                # print an error here.
                 subprocess.check_output(['rm', '-rf', self.offline_machine_data_dir])
+            # JPRVITA: why are you creating the directory again in the line
+            # below?
             os.mkdir(self.offline_machine_data_dir)
             f.close()
         elif os.path.exists(self.machine_id_path) is True:
+            # JPRVITA: please don't duplicate this code block. You can try to
+            # read an id from metrics_id or machine_id before trying to look
+            # for or creating any directories, and have only one block with
+            # open / mkdir (unless I am missing something here)
             f = open(self.machine_id_path)
             self.offline_machine_data_dir = os.path.join(target_dir, f.read(32))
             if os.path.exists(self.offline_machine_data_dir) is False:
