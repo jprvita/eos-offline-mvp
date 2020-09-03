@@ -23,6 +23,9 @@ class MVPCollector(EOSMetrics):
             # object (more on that together with parsing arguments)
             print('Please assign the metrics data storage path')
         else:
+            # JPRVITA: if we are running from the USB device, can't we simply
+            # automatically get this path here? os.getcwd() will give you the
+            # current working directory
             self.offline_metrics_usbdisk_node = storage_path
         self.offline_metrics_dst_dir = 'eos-metrics-data-1'
         self.disk_free_space_in_bytes = 0
