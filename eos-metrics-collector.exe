@@ -100,7 +100,7 @@ class MVPCollector(EOSMetrics):
             shutil.copyfile(os.path.join(self.metrics_cache_dir, file), os.path.join(self.offline_machine_data_dir, os.path.basename(file)))
 
     def reset_metrics_data(self):
-        if (self.get_service_state() == 0):	#active
+        if (self.get_service_state() == 0):
             subprocess.check_output(['/usr/bin/systemctl', 'stop', self.systemd_service])
         files = ['variants.dat', 'variants.dat.metadata']
         for file in files:
