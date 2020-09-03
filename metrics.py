@@ -34,6 +34,8 @@ class EOSMetrics():
     def get_environment_config(self): # JPRVITA: unused method
         print(self.config.get("global", "environment"))
 
+    # JPRVITA: calling this method is_metrics_service_active() and making it
+    # return a boolean will make the calling code easier to read
     def get_service_state(self):
         status = os.system('systemctl is-active --quiet ' + self.systemd_service)
         return (status)
