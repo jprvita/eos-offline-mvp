@@ -68,6 +68,10 @@ class MVPUploader(EOSMetrics):
             subprocess.check_output(['/usr/bin/systemctl', 'start', self.systemd_service])
 
 def main():
+    # JPRVITA: if we are expecting command line arguments, let's put together a
+    # familiar interface, including an usage description. This can be easily
+    # done with python's argparse module:
+    # https://docs.python.org/3/library/argparse.html
     location = os.path.dirname(os.path.realpath(sys.argv[0]))
     uploader = MVPUploader(location)
     # JPRVITA: for comparing version strings I recommend using the

@@ -19,6 +19,8 @@ class MVPCollector(EOSMetrics):
             '''
             TODO: Use dialog window instead
             '''
+            # JPRVITA: let's have a full usage instead, before creating this
+            # object (more on that together with parsing arguments)
             print('Please assign the metrics data storage path')
         else:
             self.offline_metrics_usbdisk_node = storage_path
@@ -89,6 +91,10 @@ class MVPCollector(EOSMetrics):
 
 
 def main():
+    # JPRVITA: if we are expecting command line arguments, let's put together a
+    # familiar interface, including an usage description. This can be easily
+    # done with python's argparse module:
+    # https://docs.python.org/3/library/argparse.html
     location = os.path.dirname(os.path.realpath(sys.argv[0]))
     collector = MVPCollector(location)
     if collector.get_usbdisk_free_space() > 10 * 1024 * 1024:
