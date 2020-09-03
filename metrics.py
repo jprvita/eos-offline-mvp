@@ -28,10 +28,10 @@ class EOSMetrics():
                 self.eos_version = major
                 return float(major)
 
-    def get_upload_enable_config(self):
+    def get_upload_enable_config(self): # JPRVITA: unused method
         print(self.config.get("global", "uploading_enabled"))
 
-    def get_environment_config(self):
+    def get_environment_config(self): # JPRVITA: unused method
         print(self.config.get("global", "environment"))
 
     def get_service_state(self):
