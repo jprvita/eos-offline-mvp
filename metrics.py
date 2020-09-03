@@ -6,6 +6,8 @@ import subprocess
 import time
 import shutil
 
+# Perhaps OfflineMetrics would be a better name here, in-line with the other
+# suggestions?
 class EOSMetrics():
     def __init__(self):
         self.metrics_cache_dir = '/var/cache/metrics'

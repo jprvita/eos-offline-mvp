@@ -7,6 +7,10 @@ import shutil
 
 from metrics import EOSMetrics
 
+# JPRVITA: MVP in this project context means Minimum Viable Project, meaning
+# that we are trying to keep this as simple as possible, and not trying to make
+# a fully-featured piece of software. But it is not a great name for classes,
+# repos or programs. Perhaps OfflineMetricsCollector instead?
 class MVPCollector(EOSMetrics):
 
     def __init__(self, storage_path=None):
