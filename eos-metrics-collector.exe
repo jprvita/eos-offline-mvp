@@ -100,6 +100,13 @@ class MVPCollector(EOSMetrics):
             shutil.copyfile(os.path.join(self.metrics_cache_dir, file), os.path.join(self.offline_machine_data_dir, os.path.basename(file)))
 
     def reset_metrics_data(self):
+        # JPRVITA: copy_metrics_data and reset_metrics_data should probably be
+        # the same function, given that the order of actions here should be:
+        # 1. stop the daemon
+        # 2. copy the data
+        # 3. verify that the data copied correctly
+        # 4. remove the source files (reset metrics data)
+        # 5. start the daemon back again
         if (self.get_service_state() == 0):
             subprocess.check_output(['/usr/bin/systemctl', 'stop', self.systemd_service])
         files = ['variants.dat', 'variants.dat.metadata']
