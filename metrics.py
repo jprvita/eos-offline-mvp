@@ -17,7 +17,7 @@ class EOSMetrics():
         self.config = configparser.ConfigParser()
         self.config.read(self.metrics_config_file)
 
-    def	get_eos_version(self):
+    def get_eos_version(self):
         f = open("/etc/os-release")
         for line in f.readlines():
             if line.startswith("VERSION="):
