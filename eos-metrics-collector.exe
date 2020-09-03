@@ -92,6 +92,9 @@ class MVPCollector(EOSMetrics):
             printf('No tracking/machine id file found')
 
     def copy_metrics_data(self):
+        # JPRVITA: you should stop the metrics daemon before copying the files,
+        # to make it flush any pending data to disk and to guarantee the files
+        # will not change while you are copying them.
         files = ['boot_offset_metafile', 'network_send_file', 'variants.dat', 'variants.dat.metadata']
         for file in files:
             shutil.copyfile(os.path.join(self.metrics_cache_dir, file), os.path.join(self.offline_machine_data_dir, os.path.basename(file)))
