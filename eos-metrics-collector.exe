@@ -87,6 +87,7 @@ class MVPCollector(EOSMetrics):
             target_file = os.path.join(self.metrics_cache_dir, file)
             subprocess.check_output(['sudo', 'rm', '-f', target_file])
         subprocess.check_output(['/usr/bin/systemctl', 'start', self.systemd_service])
+
     def metrics_copy(self):
         self.create_folder_for_machine()
         self.copy_tracking_id()
