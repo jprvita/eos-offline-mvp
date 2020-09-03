@@ -65,6 +65,11 @@ class MVPUploader(EOSMetrics):
 def main():
     location = os.path.dirname(os.path.realpath(sys.argv[0]))
     uploader = MVPUploader(location)
+    # JPRVITA: for comparing version strings I recommend using the
+    # StrictVersion class from distutils.version (already available on
+    # Endless). Then the line below would read:
+    # if StrictVersion(uploader.get_eos_version) < StrictVersion("3.9.0")
+    # (also, the logic below is inverted)
     if uploader.get_eos_version() > 3.9:
         print("Please run this command on >= EOS 3.9")
     else:

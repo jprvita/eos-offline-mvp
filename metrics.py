@@ -13,10 +13,11 @@ class EOSMetrics():
         self.machine_id_path = '/etc/machine-id'
         self.systemd_service = 'eos-metrics-event-recorder.service'
         self.metrics_config_file = '/etc/metrics/eos-metrics-permissions.conf'
-        self.eos_version = float(0)
+        self.eos_version = float(0) # JPRVITA: I recommend using string here instead
         self.config = configparser.ConfigParser()
         self.config.read(self.metrics_config_file)
 
+    # JPRVITA: then this method would return a version string, like "3.8.6"
     def get_eos_version(self):
         f = open("/etc/os-release")
         for line in f.readlines():
