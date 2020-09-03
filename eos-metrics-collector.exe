@@ -100,6 +100,8 @@ def main():
     # https://docs.python.org/3/library/argparse.html
     location = os.path.dirname(os.path.realpath(sys.argv[0]))
     collector = MVPCollector(location)
+    # JPRVITA: we should check if there is enought free space for the data we
+    # are trying to copy, instead of using a pre-defined number
     if collector.get_usbdisk_free_space() > 10 * 1024 * 1024:
         collector.metrics_copy()
         print("Copy Done")
