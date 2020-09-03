@@ -72,12 +72,19 @@ class MVPCollector(EOSMetrics):
         else:
             print('There is no tracking/machine id available')
 
+    # JPRVITA: why do we need to do this in a separate method? isn't is easier
+    # to do it as part of create_folder_for_machine, where you already have the
+    # tracking_id or machine_id?
     def copy_tracking_id(self):
         print(self.tracking_id_path)
         if os.path.exists(self.tracking_id_path) is True:
             # The tracking id file has permission -rwxrwsr-x  which
             # will raise PermissionError for shutil.copy, use copyfile
             # instead
+            # JPRVITA: the comment above does not explain why we get this
+            # permission error, which is because shutils.copy try to copy the
+            # file permissions as well, and FAT32 does not support the
+            # permissions from this file.
             shutil.copyfile(self.tracking_id_path, os.path.join(self.offline_machine_data_dir, os.path.basename(self.tracking_id_path)))
         elif os.path.exists(self.machine_id_path) is True:
             shutil.copyfile(self.machine_id_path, os.path.join(self.offline_machine_data_dir, os.path.basename(self.tracking_id_path)))
