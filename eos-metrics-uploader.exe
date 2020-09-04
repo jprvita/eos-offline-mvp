@@ -36,6 +36,10 @@ class MVPUploader(EOSMetrics):
             subprocess.check_output(['/usr/bin/systemctl', 'stop', self.systemd_service])
         srcdir = os.path.join(self.offline_metrics_usbdisk_node, self.offline_metrics_src_dir)
         for machine_dir in os.listdir(srcdir):
+            # JPRVITA: Let's use tempfile.mkdtemp to create a temp dir safely
+            # https://docs.python.org/3/library/tempfile.html#tempfile.mkdtemp
+            # Also, I think you wanted to create machine_dir here, and
+            # offline_tmp_metrics_dir outside of this loop
             os.mkdir(self.offline_tmp_metrics_dir)
             machine_path = os.path.join(srcdir, machine_dir)
             for file in os.listdir(machine_path):
@@ -45,10 +49,14 @@ class MVPUploader(EOSMetrics):
             subprocess.Popen(['sudo', 'chown', '-R', 'metrics:metrics', self.offline_tmp_metrics_dir])
             persistent_cache_dir_arg = '--persistent-cache-directory=' + self.offline_tmp_metrics_dir
             tracking_id_path_arg = '--tracking-id-file-path=' + self.offline_tmp_metrics_dir + '/tracking-id'
+            # JPRVITA: I think you wanted the commented-out variation of this
+            # command
             #self.daemon = subprocess.Popen(['sudo', '-u', 'metrics', '/lib/eos-event-recorder-daemon/eos-metrics-event-recorder', persistent_cache_dir_arg, tracking_id_path_arg])
             self.daemon = subprocess.Popen(['sudo', '-u', 'metrics', '/lib/eos-event-recorder-daemon/eos-metrics-event-recorder', persistent_cache_dir_arg])
 
             time.sleep(10)
+            # JPRVITA: we should probably confirm that the deamon is running at
+            # this point somehow
 
             try:
                 subprocess.check_output(['/usr/bin/eos-upload-metrics'])
