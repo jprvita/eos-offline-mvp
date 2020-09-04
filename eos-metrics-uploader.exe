@@ -23,7 +23,11 @@ class MVPUploader(EOSMetrics):
             '''
             print('Please assign the metrics data storage path')
         else:
+            # JPRVITA: same here as in the collector, we can probably find this
+            # from CWD
             self.offline_metrics_usbdisk_node = storage_path
+        # JPRVITA: The name below does not match offline_metrics_dst_dir
+        # ("eos-metrics-data-1") in the collector
         self.offline_metrics_src_dir = 'eos-metrics-data'
         self.offline_tmp_metrics_dir = '/var/tmp/metrics'
 
